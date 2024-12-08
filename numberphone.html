@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Number Input</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .container {
+      display: inline-block;
+      text-align: left;
+    }
+    #slider {
+      width: 300px;
+      margin-top: 20px;
+    }
+    #phone-bubble {
+      position: relative;
+      display: inline-block;
+      background: #333;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 20px;
+      top: -30px;
+      left: 0;
+      font-size: 16px;
+      visibility: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <label for="slider">Please enter your phone number:</label>
+    <div id="phone-bubble"></div>
+    <input type="range" id="slider" min="1000000000" max="9999999999" step="1" value="5000000000">
+  </div>
+
+  <script>
+    const slider = document.getElementById('slider');
+    const bubble = document.getElementById('phone-bubble');
+
+    slider.addEventListener('input', () => {
+      const phoneNumber = slider.value;
+      bubble.textContent = phoneNumber;
+      bubble.style.visibility = 'visible';
+
+      // Adjust bubble position based on slider value
+      const percentage = (phoneNumber - slider.min) / (slider.max - slider.min);
+      const offset = percentage * slider.offsetWidth - bubble.offsetWidth / 2;
+      bubble.style.left = `${offset}px`;
+    });
+  </script>
+</body>
+</html>
